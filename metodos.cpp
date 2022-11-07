@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX 10
+#define MAX 1000
 
 void troca(int *x, int *y);
 void imprime(int vet[]);
@@ -18,11 +18,11 @@ int main(){
 
     int vetor[MAX];
 
-    preencher(vetor, 40);
+    preencher(vetor, 100000);
 
     imprime(vetor);
     
-    // bubble(vetor);
+    bubble(vetor);
     // select(vetor);
    //insertion(vetor);
 
@@ -41,27 +41,33 @@ void troca(int *x, int *y){
 void imprime(int vet[]){
     int i;
     for ( i = 0; i < MAX; i++){
-        printf("[%d] ", vet[i]);
+        printf("[%d]\n", vet[i]);
     }
     printf("\n");
 }
 
 void preencher(int vet[], int N){
     int i;
-    for ( i = 0; i < N; i++){
+    srand(time(NULL));
+
+    for ( i = 0; i < MAX; i++){
         vet[i] = (rand() % N) + 1;
     }
 }
 
 void bubble(int vet[]){
     int i, j;
-    for (i = 0; i < MAX - 1; i++){
-        for (j = 1; j < MAX - i; j++){
+    int flag = 0;
+    for (i = 0; i < MAX; i++){
+        for (j = 1; j < MAX; j++){
             if(vet[j-1] > vet[j]){
                 troca(&vet[j], &vet[j - 1]);
+                flag++;
             }
         }       
     }
+
+    printf("\n o numero de trocas e %d\n\n", flag);
 }
 
 void select(int vet[]){
